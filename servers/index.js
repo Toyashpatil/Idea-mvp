@@ -13,7 +13,7 @@ const PORT = 5000;
 connectTOMongo();
 
 app.use('/auth',require('./routes/user'));
-// app.use('/assets',require('./routes/assets'));
+app.use('/payment',require('./routes/transaction'));
 // app.use('/threeModel',require('./routes/threeModel'));
 
 
