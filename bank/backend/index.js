@@ -9,7 +9,8 @@ const connectTOMongo = require('./db');
 app.use(express.json());
 
 connectTOMongo();
-app.use(cors()); 
+app.use(cors());
+ 
 app.get("/", (req, res) => {
     res.send("GenGuard Employee API is running...");
   });
