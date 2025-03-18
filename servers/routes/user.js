@@ -1,11 +1,12 @@
 // userRoutes.js
+
 require('dotenv').config();
 const express = require('express');
 const jwt = require('jsonwebtoken');
-
 const User = require('../models/User'); // Adjust path as needed
 
 const router = express.Router();
+const  JWT_SECRET  = "Idea#123"
 
 //----------------------------
 // Health Check
@@ -81,5 +82,52 @@ router.post('/register', async (req, res) => {
   }
 });
 
+//----------------------------
+// Login
+//----------------------------
+router.post('/login', async (req, res) => {
+  try {
+    const { email, mobileNumber } = req.body;
+
+    // Basic check: at least one identifier
+    if (!email && !mobileNumber) {
+      return res.status(400).json({
+        message: 'Please provide either an email or mobile number to login.'
+      });
+    }
+
+    // Find user by email or mobileNumber
+    let user;
+    if (email) {
+      user = await User.findOne({ email });
+    } else {
+      user = await User.findOne({ mobileNumber });
+    }
+
+    // If no user found
+    if (!user) {
+      return res.status(400).json({ message: 'User not found. Please register first.' });
+    }
+
+    // Check if user is flagged as fraudulent
+    if (user.fraudulent) {
+      return res.status(403).json({ message: 'User is flagged as fraudulent.' });
+    }
+
+    // (No password check here, as your schema does not have a password field)
+    // In production, consider OTP-based or password-based verification.
+
+    // Generate JWT
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+    return res.status(200).json({
+      message: 'Login successful',
+      success: true,
+      token,
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    return res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
 module.exports = router;
