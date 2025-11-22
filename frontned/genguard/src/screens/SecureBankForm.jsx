@@ -53,7 +53,7 @@ export default function SecureBankForm() {
         </div>
 
         <h1 className="text-white text-3xl font-semibold mt-4">
-          SecureBank AI
+          GenGuard
         </h1>
         <p className="text-white/80 text-sm">
           Powered by Generative AI Fraud Detection
@@ -130,7 +130,7 @@ export default function SecureBankForm() {
                     name="name"
                     value={form.name}
                     onChange={handleChange}
-                    placeholder="Naman Sharma"
+                    placeholder="Name"
                     className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
@@ -146,7 +146,7 @@ export default function SecureBankForm() {
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="naman@example.com"
+                    placeholder="name@example.com"
                     className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
@@ -162,7 +162,7 @@ export default function SecureBankForm() {
                     name="phone"
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 XXXXX XXXXX"
                     className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
