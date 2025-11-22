@@ -7,6 +7,7 @@ import Dashboard from './screens/Dashboard.jsx'
 import Simulate from './screens/Simulate.jsx'
 import Login from './screens/login.jsx'
 import Insights from './screens/Insights.jsx'
+import CrossBorder from './screens/CrossBorder.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<SecureBankForm />} />
   <Route path="/dashboard" element={<Dashboard />} />
   <Route path="/simulate" element={<Simulate />} />
+    <Route path="/cross-border" element={<CrossBorder />} />
     <Route path="/insights" element={<Insights />} />
   <Route path="/login" element={<Login />} />
       </Routes>

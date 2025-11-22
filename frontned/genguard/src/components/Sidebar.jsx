@@ -3,11 +3,8 @@ import { NavLink } from 'react-router-dom'
 
 const menuItems = [
   { label: "Dashboard", icon: <Home size={18} />, to: "/dashboard", end: true },
-  { label: "Transactions", icon: <CreditCard size={18} />, to: "/transactions" },
   { label: "Cross-Border", icon: <Globe size={18} />, to: "/cross-border" },
   { label: "Simulate", icon: <Activity size={18} />, to: "/simulate" },
-  { label: "Network Graph", icon: <AlertTriangle size={18} />, to: "/network-graph" },
-  { label: "Insider Threats", icon: <AlertTriangle size={18} />, to: "/insider-threats" },
   { label: "AI Insights", icon: <Activity size={18} />, to: "/insights" },
 ];
 
