@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import {
   UserIcon,
   EnvelopeIcon,
@@ -27,6 +28,7 @@ export default function SecureBankForm() {
 
   const next = () => setStep((s) => Math.min(s + 1, 3));
   const back = () => setStep((s) => Math.max(s - 1, 1));
+  const navigate = useNavigate()
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0A2E47] to-[#0C9BA6] p-4">
@@ -277,6 +279,7 @@ export default function SecureBankForm() {
             </div>
 
             <button
+              onClick={() => navigate('/dashboard')}
               className="w-full bg-teal-400 hover:bg-teal-500 text-white py-3 rounded-lg transition"
             >
               Complete Setup
