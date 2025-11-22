@@ -28,7 +28,7 @@ export default function SecureBankForm() {
 
   const next = () => setStep((s) => Math.min(s + 1, 3));
   const back = () => setStep((s) => Math.max(s - 1, 1));
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0A2E47] to-[#0C9BA6] p-4">
@@ -169,12 +169,24 @@ export default function SecureBankForm() {
               </div>
             </div>
 
+            {/* Continue button */}
             <button
               onClick={next}
               className="w-full mt-6 bg-teal-400 hover:bg-teal-500 text-white py-3 rounded-lg transition"
             >
               Continue
             </button>
+
+            {/* LOGIN LINK INSIDE WHITE BOX */}
+            <p className="text-center text-sm text-gray-600 mt-4">
+              Already have an account?{" "}
+              <span
+                onClick={() => navigate("/login")}
+                className="text-teal-600 font-semibold cursor-pointer hover:underline"
+              >
+                Log in
+              </span>
+            </p>
           </>
         )}
 
@@ -231,7 +243,7 @@ export default function SecureBankForm() {
           <>
             <h2 className="text-lg font-semibold mb-4">Privacy & Consent</h2>
 
-            {/* How AI protects you */}
+            {/* AI Features */}
             <div className="bg-gray-50 p-4 rounded-xl mb-4">
               <p className="font-medium mb-2">How we use AI to protect you:</p>
 
@@ -248,7 +260,7 @@ export default function SecureBankForm() {
               ))}
             </div>
 
-            {/* Consent Box */}
+            {/* Consent */}
             <div className="bg-gray-50 p-4 rounded-xl mb-4">
               <label className="flex items-start space-x-2 cursor-pointer">
                 <input
@@ -271,7 +283,7 @@ export default function SecureBankForm() {
               </label>
             </div>
 
-            {/* Warning box */}
+            {/* Demo Warning */}
             <div className="bg-yellow-50 border border-yellow-300 text-yellow-700 p-4 rounded-xl text-sm mb-4">
               <strong>Note:</strong> This is a demo environment. Real systems must comply with
               data protection regulations and should never collect or expose PII
@@ -293,11 +305,14 @@ export default function SecureBankForm() {
             </button>
           </>
         )}
+
       </div>
 
+      {/* Footer */}
       <p className="text-white/70 text-xs mt-6">
         Secured by AI-powered fraud detection
       </p>
+
     </div>
   );
 }
