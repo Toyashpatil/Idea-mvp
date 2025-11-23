@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import customers from '../data/customers'
 import cardFeatures from '../data/cardFeatures'
+import getRecommendation from '../utils/api'
 
 export default function Insights() {
   const [account, setAccount] = useState('')
@@ -11,33 +12,39 @@ export default function Insights() {
   const handleRecommend = async () => {
     setLoading(true)
     setResult(null)
-
-    // Simulate fetch: search in local customers dataset by Account Number
     const acctNum = Number(account)
-    const record = customers.find(c => c['Account Number'] === acctNum)
+    try {
+      const data = await getRecommendation(acctNum)
+      console.log(data)
 
-    await new Promise(r => setTimeout(r, 400)) // small UX delay
+      // If API returns an error shape, surface it
+      if (!data) {
+        setResult({ error: 'Empty response from recommendation API.' })
+      } else if (data.error) {
+        setResult({ error: data.error })
+      } else {
+        // Try to normalize to the same structure this component expects
+        // If API already returns { record, cards } or { record, recommendedCards }, use it directly
+        const cardsFromApi = data.cards || data.recommendedCards || data.Recommended_Cards || []
+        const record = data.record || data.customer || null
 
-    if (!record) {
-      setResult({ error: 'No customer found for this account number.' })
+        const cardsWithFeatures = cardsFromApi.map(name => ({
+          name,
+          features: cardFeatures[name] || [
+            'Feature 1 (not available)',
+            'Feature 2 (not available)',
+            'Feature 3 (not available)'
+          ]
+        }))
+
+        setResult({ record, cards: cardsWithFeatures })
+      }
+    } catch (err) {
+      console.error(err)
+      setResult({ error: err.message || 'Failed to fetch recommendations.' })
+    } finally {
       setLoading(false)
-      return
     }
-
-    const cards = record['Recommended_Cards'] || []
-
-    // Build card details using static cardFeatures map
-    const cardsWithFeatures = cards.map(name => ({
-      name,
-      features: cardFeatures[name] || [
-        'Feature 1 (not available)',
-        'Feature 2 (not available)',
-        'Feature 3 (not available)'
-      ]
-    }))
-
-    setResult({ record, cards: cardsWithFeatures })
-    setLoading(false)
   }
 
   return (
