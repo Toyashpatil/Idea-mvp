@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 
 const menuItems = [
   { label: "Dashboard", icon: <Home size={18} />, to: "/dashboard", end: true },
-  { label: "Cross-Border", icon: <Globe size={18} />, to: "/cross-border" },
   { label: "Simulate", icon: <Activity size={18} />, to: "/simulate" },
   { label: "AI Insights", icon: <Activity size={18} />, to: "/insights" },
 ];
@@ -14,7 +13,7 @@ export default function Sidebar() {
       {/* Logo */}
       <div>
         <h1 className="text-xl font-semibold mb-6 flex items-center gap-2">
-          <span className="text-teal-300">🛡️</span> SecureBank AI
+          <span className="text-teal-300">🛡️</span> GenGuard
         </h1>
 
         {/* Menu Items */}
